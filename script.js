@@ -33,6 +33,7 @@ function createColumn(size) {
 }
 
 function createRow(size) {
+    const colors = ['#FF0000', '#FF4500', '#FF8C00', '#FFD700', '#FFFFE0', '#7CFC00', '#00BFFF', '#9400D3', '#FFFFFF'];
     let columns = document.querySelectorAll(".column");
     columns.forEach(column => {
         for (let i = 0; i < size; i++) {
@@ -40,14 +41,21 @@ function createRow(size) {
             newRow.classList.add('row');
             newRow.style.height = `${600 / size}px`;
             newRow.style.boxSizing = "border-box";
+            newRow.setAttribute("data-color-index", 0); 
             column.appendChild(newRow);
+
             newRow.addEventListener("mouseenter", () => {
-                newRow.style.backgroundColor = "gray";
-            });
-            newRow.addEventListener("mouseleave", () => {
-                newRow.style.backgroundColor = "";
+                let currIndex = parseInt(newRow.getAttribute('data-color-index'));
+                if (currIndex < colors.length) {
+                    newRow.style.backgroundColor = colors[currIndex];
+                    newRow.setAttribute('data-color-index', currIndex + 1);
+                }
             });
         }
     })
 }
 
+function randomColor() {
+    var color = '#';
+    var letters = ['#FF0000', '#FF4500', '#FF8C00', '#FFD700', '#FFFFE0', '#7CFC00', '#00BFFF', '#9400D3', '#FFFFFF'];
+}
